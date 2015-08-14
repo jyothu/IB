@@ -1,0 +1,13 @@
+= form_for @bucket, html: { class: "form form-horizontal bucket" } do |f|
+  .form-group
+    = f.label :name, class: 'control-label'
+    .controls
+      = f.text_field :name, class: 'form-control', required: true
+    = error_span(@bucket[:name])
+  .form-group
+    = f.label :company_id, class: 'control-label'
+    .controls
+      = f.text_field :company_id, class: 'form-control', required: true
+    = error_span(@bucket[:company_id])
+  = f.submit nil,class: 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), buckets_path, :class => 'btn btn-default'

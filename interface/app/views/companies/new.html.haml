@@ -1,0 +1,47 @@
+%section
+  #container_demo
+    / hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4
+    %a#toregister.hiddenanchor
+    %a#tologin.hiddenanchor
+    #wrapper
+      #login.animate.form
+        = form_for @user, :url => session_path(@user) do |f|
+          %h1 Log in
+          %p
+            %label.uname{"data-icon" => "u", :for => "usernamesignup"} Your Email
+            = f.email_field :email, placeholder: "Email ID", required: "required", id: "usernamesignup"
+          %p
+            %label.youpasswd{"data-icon" => "p", :for => "passwordsignup"} Your password
+            = f.password_field :password, :placeholder => "eg. X8df!90EO", :required => "required", id: "passwordsignup"
+          %p.keeplogin
+            = f.check_box :remember_me
+            Keep me logged in
+          %p.login.button
+            %input{:type => "submit", :value => "Login"}/
+          %p.change_link
+            Not a member yet ?
+            %a.to_register{:href => "#toregister"} Join us
+      #register.animate.form
+        = form_for @company, :html => { :class => "form-horizontal user" } do |f|
+          %h1 Sign up
+          %p
+            %label.uname{"data-icon" => "u", :for => "usernamesignup"} Company Name
+            = f.text_field :name, placeholder: "Company Name", required: "required", id: "usernamesignup"
+          = f.fields_for :users do |user|
+            %p
+              %label.uname{"data-icon" => "u", :for => "usernamesignup"} Your Name
+              = user.text_field :name, placeholder: "Name", required: "required", id: "usernamesignup"
+            %p
+              %label.youmail{"data-icon" => "e", :for => "emailsignup"} Your email
+              = user.email_field :email, placeholder: "mysupermail@mail.com", required: "required", id: "emailsignup"
+            %p
+              %label.youpasswd{"data-icon" => "p", :for => "passwordsignup"} Your password
+              = user.password_field :password, :placeholder => "eg. X8df!90EO", :required => "required", id: "passwordsignup"
+            %p
+              %label.youpasswd{"data-icon" => "p", :for => "passwordsignup_confirm"} Confirm your password
+              = user.password_field :password_confirmation, :placeholder => "eg. X8df!90EO", :required => "required", id: "passwordsignup_confirm" 
+            %p.signin.button
+              %input{:type => "submit", :value => "Sign up"}
+            %p.change_link
+              Already a member ?
+              %a.to_register{:href => "#tologin"} Go and log in

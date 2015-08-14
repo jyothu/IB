@@ -1,0 +1,45 @@
+.container.col
+  = form_for @invoice, :html => { :class => "form-horizontal invoice" } do |f|
+    - if @invoice.errors.any?
+      #error_expl.panel.panel-danger
+        .panel-heading
+          %h3.panel-title
+            = pluralize(@invoice.errors.count, "error")
+            prohibited this invoice from being saved:
+        .panel-body
+          %ul
+            - @invoice.errors.full_messages.each do |msg|
+              %li= msg
+    .control-group
+      = f.label :name, :class => 'control-label'
+      .controls
+        = f.text_field :name, :class => 'text_field'
+      = error_span(@invoice[:name])
+    .control-group
+      = f.label :month, :class => 'control-label'
+      .controls
+        = f.text_field :month, :class => 'text_field datepicker'
+      = error_span(@invoice[:month])
+    .control-group
+      = f.label :type, :class => 'control-label'
+      .controls
+        = f.text_field :type, :class => 'text_field'
+      = error_span(@invoice[:type])
+    .control-group
+      = f.label :vendor, :class => 'control-label'
+      .controls
+        = f.text_field :vendor, :class => 'text_field'
+      = error_span(@invoice[:vendor])
+    .control-group
+      = f.label :file, :class => 'control-label'
+      .controls
+        = f.file_field :file, :class => 'text_field'
+      = error_span(@invoice[:file])
+    .control-group
+      = f.label :company_id, :class => 'control-label'
+      .controls
+        = f.text_field :company_id, :class => 'text_field'
+      = error_span(@invoice[:company_id])
+    = f.submit nil, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), |
+      invoices_path, :class => 'btn btn-default'                   |

@@ -1,0 +1,23 @@
+- model_class = Bucket
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name(:id)
+      %th= model_class.human_attribute_name(:name)
+      %th= model_class.human_attribute_name(:company_id)
+      %th= model_class.human_attribute_name(:created_at)
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @buckets.each do |bucket|
+      %tr
+        %td= link_to bucket.id, bucket_path(bucket)
+        %td= bucket.name
+        %td= bucket.company_id
+        %td=l bucket.created_at
+        %td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_bucket_path(bucket), :class => 'btn btn-default btn-xs'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), bucket_path(bucket), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
+
+= link_to t('.new', :default => t("helpers.links.new")), new_bucket_path, :class => 'btn btn-primary'

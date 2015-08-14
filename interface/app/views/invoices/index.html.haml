@@ -1,0 +1,22 @@
+.row
+  - if @buckets
+    - @buckets.each do |bucket|
+      .col-sm-4.col-md-2
+        .thumbnail
+          .caption
+            %h2
+              = bucket.name
+              %span.badge= bucket.invoices.size 
+            %p
+              %a.btn.btn-primary{:href => invoices_path(:bucket => bucket), :role => "button"} Button
+
+.col-sm-9
+  - if @invoices
+    - @invoices.each do |invoice|
+      .media
+        %a.pull-left{:href => "#"}
+          - file_url = invoice.file_file_name ? invoice.file.url : 'no_image.gif'
+          = image_tag file_url, class: 'media-object', :style => "width: 64px; height: 64px;"
+          %img.media-object{:alt => "64x64", "data-src" => "holder.js/64x64", :src => "file_url", }/
+        .media-body
+          %h4.media-heading= invoice.name
